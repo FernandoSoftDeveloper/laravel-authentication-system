@@ -9,7 +9,7 @@
     <main>
 
         <div class="container py-5 text-center">
-            <h1>Welcome: User name</h1>
+            <h1>Welcome:</h1>
         </div>
 
     </main>

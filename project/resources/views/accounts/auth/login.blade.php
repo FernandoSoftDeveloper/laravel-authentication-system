@@ -1,5 +1,9 @@
 @extends('base.base')
 
+@section('title', 'Login into account')
+
+@include('partials.navbar')
+
 @section('content')
 
     <main>
@@ -16,17 +20,23 @@
                 </div>
                 <div class="col-12 col-md-6">
 
-                    <form>
+                    <form method="POST" action="{{ route('authenticate') }}">
                         
+                        @csrf
+
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
-                            <div id="emailHelp" class="form-text">Error message here!</div>
+                            <input type="text" class="form-control" id="username" value="{{ old('username') }}" name="username" aria-describedby="emailHelp">
+                            
+                            @error('username')
+                                <div id="emailHelp" class="form-text">{{ $message }}</div>                                
+                            @enderror
+                        
                         </div>
                         
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password">
+                            <input type="password" name="password" class="form-control" id="password">
                         </div>
 
                         <div class="mb-3 form-check">

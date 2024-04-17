@@ -1,5 +1,9 @@
 @extends('base.base')
 
+@section('title', 'Create an account')
+
+@include('partials.navbar')
+
 @section('content')
 
     <main>

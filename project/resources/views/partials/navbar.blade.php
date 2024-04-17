@@ -24,7 +24,7 @@
                     @auth
                         <li><a class="dropdown-item" href="{{ route('dashboard') }}">dashboard</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                        <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
                         
                     @else
                         <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
