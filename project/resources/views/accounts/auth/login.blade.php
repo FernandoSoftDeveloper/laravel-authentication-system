@@ -44,6 +44,10 @@
                             <label class="form-check-label" for="exampleCheck1">Remember me</label>
                         </div>
 
+                        <div class="mb-3">
+                            <a href="{{ route('forget_password') }}">Forget Password?</a>
+                        </div>
+
                         <button type="submit" class="btn btn-dark">login</button>
                     
                     </form>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CoreController;
+use App\Http\Controllers\PasswordResetController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [CoreController::class, 'index'])->name('home');
@@ -14,3 +15,9 @@ Route::get('/accounts/auth/logout', [AccountController::class, 'logout'])->name(
 
 Route::post('/accounts/register', [AccountController::class, 'register'])->name('register');
 Route::post('/accounts/auth/authenticate', [AccountController::class, 'authenticate'])->name('authenticate');
+
+// Password Reset
+Route::get('/accounts/forget-password', [PasswordResetController::class, 'forgetPassword'])->name('forget_password');
+Route::post('/accounts/forget-password', [PasswordResetController::class, 'forgetPasswordPost'])->name('forget_password_post');
+Route::get('/accounts/reset-password/{token}', [PasswordResetController::class, 'resetPassword'])->name('reset_password');
+Route::post('/accounts/reset-password', [PasswordResetController::class, 'resetPasswordPost'])->name('reset_password_post');
