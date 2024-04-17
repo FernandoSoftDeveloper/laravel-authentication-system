@@ -1,18 +1,14 @@
 <?php
 
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CoreController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::get('/', [CoreController::class, 'index'])->name('home');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Accounts Routes
+Route::get('/accounts/login', [AccountController::class, 'login'])->name('login');
+Route::get('/accounts/signup', [AccountController::class, 'signup'])->name('signup');
+Route::get('/accounts/dashboard', [AccountController::class, 'dashboard'])->name('dashboard');
+
+Route::post('accounts/register', [AccountController::class, 'register'])->name('register');
