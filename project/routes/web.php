@@ -21,3 +21,4 @@ Route::get('/accounts/forget-password', [PasswordResetController::class, 'forget
 Route::post('/accounts/forget-password', [PasswordResetController::class, 'forgetPasswordPost'])->name('forget_password_post');
 Route::get('/accounts/reset-password/{token}', [PasswordResetController::class, 'resetPassword'])->name('reset_password');
 Route::post('/accounts/reset-password', [PasswordResetController::class, 'resetPasswordPost'])->name('reset_password_post');
+

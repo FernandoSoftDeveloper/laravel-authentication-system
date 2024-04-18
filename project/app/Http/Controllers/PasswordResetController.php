@@ -16,6 +16,7 @@ class PasswordResetController extends Controller
     {
         return view('accounts.password.forget_password');
     }
+    /*
     public function forgetPasswordPost(Request $request)
     {
         $request->validate([
@@ -37,10 +38,45 @@ class PasswordResetController extends Controller
 
         return redirect()->to(route('forget_password'))
             ->with('success', 'We have send an email to reset password');
-    }
-    public function resetPassword()
+    }*/
+
+    public function forgetPasswordPost(Request $request)
     {
-        return view('accounts.password.reset_password');
+        $request->validate([
+            'email' => 'required|email|exists:users',
+        ]);
+
+        // Verificar si ya existe un registro para esta dirección de correo electrónico
+        $existingToken = DB::table('password_reset_tokens')
+                            ->where('email', $request->email)
+                            ->first();
+
+        // Si ya existe un registro, podrías actualizar el token en lugar de insertar uno nuevo
+        if ($existingToken) {
+            $token = $existingToken->token;
+        } else {
+            $token = Str::random(64);
+            
+            DB::table('password_reset_tokens')->insert([
+                'email' => $request->email,
+                'token' => $token,
+                'created_at' => Carbon::now(),
+            ]);
+        }
+
+        Mail::send('emails.forget_password', ['token' => $token], function ($message) use ($request) {
+            $message->to($request->email);
+            $message->subject('Reset Password');        
+        });
+
+        return redirect()->to(route('forget_password'))
+            ->with('success', 'We have sent an email to reset password');
+    }
+
+
+    public function resetPassword($token)
+    {
+        return view('accounts.password.reset_password', compact('token'));
     }
     public function resetPasswordPost(Request $request)
     {
