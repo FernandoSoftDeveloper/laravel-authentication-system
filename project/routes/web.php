@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\CoreController;
 use App\Http\Controllers\PasswordResetController;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +23,5 @@ Route::post('/accounts/forget-password', [PasswordResetController::class, 'forge
 Route::get('/accounts/reset-password/{token}', [PasswordResetController::class, 'resetPassword'])->name('reset_password');
 Route::post('/accounts/reset-password', [PasswordResetController::class, 'resetPasswordPost'])->name('reset_password_post');
 
+// Contact Us Routes
+Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact_us');
